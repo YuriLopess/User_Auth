@@ -12,41 +12,68 @@ public class Main {
         Util util = new Util();
         Map<String, String> users = new HashMap<>();
 
-        byte option;
-        boolean status;
+        byte option = 0;
+        boolean validMenu;
 
-        try {
+        String email = null;
+        String password = null;
 
-            do {
-                option = util.showMenu();
-
-                switch (option) {
-
-                    default:
-                        System.out.println("nenhum");
-
-                    case 1 :
-
-                        String email = util.getValidEmail();
-                        String password = util.getValidPassword();
-
-                        users.put(email, password);
-                        System.out.println("Email cadastrado com sucesso!");
-                        break;
-
-                    case 2:
-
-                        break;
-
-                    case 3:
-                        System.out.println("Test - Saindo..");
-                        break;
+        do {
+            validMenu = false;
+            while (!validMenu) {
+                try {
+                    System.out.println("""
+                            Escolha sua opção:
+                            
+                            1 - Criar conta
+                            2 - Fazer login
+                            3 - Sair
+                            
+                            Qual a sua opção:""");
+                    option = scanner.nextByte();
+                    validMenu = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Erro: Entrada inválida. Por favor, digite um número.");
+                    scanner.next(); // Limpa o buffer de entrada
                 }
+            }
 
-            } while (option != 3);
+            switch (option) {
+                default:
+                    System.out.println("nenhum");
+                    break;
 
-        } catch (InputMismatchException e) {
-            System.out.println("erro");
-        }
+                case 1:
+                    email = util.getValidEmail();
+                    password = util.getValidPassword();
+
+                    users.put(email, password);
+                    System.out.println("Email cadastrado com sucesso!");
+                    break;
+
+                case 2:
+                    System.out.println("Faça o login");
+                    String comparisonEmail = util.getValidEmail();
+                    while (!comparisonEmail.equals(email)) {
+                        System.out.println("Email não cadastrado. Digite novamente");
+                        comparisonEmail = util.getValidEmail();
+                    }
+
+                    String comparisonPassword = util.getValidPassword();
+                    while (!comparisonPassword.equals(password)) {
+                        System.out.println("Senha incorreta. Digite novamente");
+                        comparisonPassword = util.getValidPassword();
+                    }
+
+                    System.out.println("Login finalizado.");
+                    break;
+
+                case 3:
+                    System.out.println("Test - Saindo..");
+                    break;
+            }
+
+        } while (option != 3);
+
     }
 }

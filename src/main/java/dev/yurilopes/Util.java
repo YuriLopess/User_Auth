@@ -7,19 +7,6 @@ public class Util {
 
     Scanner scanner = new Scanner(System.in);
 
-    byte showMenu() {
-        System.out.println("""
-                Escolha sua oção:
-                
-                1 - Criar conta
-                2 - Fazer login
-                3 - Sair
-                
-                Qual a sua opção:""");
-
-        return scanner.nextByte();
-    }
-
     String askForEmail() {
         System.out.println("Digite o email:");
         return scanner.next();
@@ -62,7 +49,4 @@ public class Util {
         }
         return password;
     }
-
-
-
 }

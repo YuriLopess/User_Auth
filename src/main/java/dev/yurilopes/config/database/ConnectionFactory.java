@@ -7,11 +7,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DatabaseConfig {
+public class ConnectionFactory {
 
     private static Properties loadProperties() {
         Properties props = new Properties();
-        try (InputStream input = DatabaseConfig.class.getClassLoader().getResourceAsStream("db.properties")) {
+        try (InputStream input = ConnectionFactory.class.getClassLoader().getResourceAsStream("db.properties")) {
             if (input == null) {
                 throw new IOException("Properties file not found");
             }
@@ -31,11 +31,15 @@ public class DatabaseConfig {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public static void main(String[] args) {
-        try (Connection connection = getConnection()) {
+    public static Connection recoverConnection() {
+        Connection connection = null;
+        try {
+            connection = getConnection();
             System.out.println("Conexão estabelecida com sucesso...");
         } catch (SQLException e) {
             System.out.println("Erro ao conectar: " + e.getMessage());
         }
+        return connection;
     }
+
 }

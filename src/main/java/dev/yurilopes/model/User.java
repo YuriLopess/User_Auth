@@ -1,14 +1,11 @@
 package dev.yurilopes.model;
 
-import java.util.Date;
-
 public class User {
 
     private int id;
     private String name;
     private String email;
     private String password;
-    private Date registrationDate;
 
     public int getId() {
         return id;
@@ -42,11 +39,4 @@ public class User {
         this.password = password;
     }
 
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
-    }
 }

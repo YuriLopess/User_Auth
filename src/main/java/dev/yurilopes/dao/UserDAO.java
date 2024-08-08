@@ -1,6 +1,6 @@
 package dev.yurilopes.dao;
 
-import dev.yurilopes.config.database.ConnectionFactory;
+import dev.yurilopes.config.database.MySQLConnectionFactory;
 import dev.yurilopes.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@ public class UserDAO {
         PreparedStatement pstm = null;
 
         try {
-            connection = ConnectionFactory.recoverConnection();
+            connection = MySQLConnectionFactory.recoverConnection();
 
             pstm = (PreparedStatement) connection.prepareStatement(sql);
             pstm.setString(1, user.getName());
@@ -27,6 +27,7 @@ public class UserDAO {
         } catch (Exception e) {
 
             throw new RuntimeException(e);
+
         } finally {
             try {
                 if (pstm != null) {

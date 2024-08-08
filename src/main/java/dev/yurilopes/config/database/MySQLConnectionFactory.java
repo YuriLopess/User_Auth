@@ -7,11 +7,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class ConnectionFactory {
+public class MySQLConnectionFactory {
 
     private static Properties loadProperties() {
         Properties props = new Properties();
-        try (InputStream input = ConnectionFactory.class.getClassLoader().getResourceAsStream("db.properties")) {
+        try (InputStream input = MySQLConnectionFactory.class.getClassLoader().getResourceAsStream("db.properties")) {
             if (input == null) {
                 throw new IOException("Properties file not found");
             }

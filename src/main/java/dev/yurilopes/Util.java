@@ -1,22 +1,21 @@
 package dev.yurilopes;
 
-import java.awt.desktop.ScreenSleepEvent;
 import java.util.Scanner;
 
 public class Util {
 
     Scanner scanner = new Scanner(System.in);
 
-    String askForEmail() {
+    public String askForEmail() {
         System.out.println("Digite o email:");
         return scanner.next();
     }
 
-    boolean validationEmail(String enteredEmail) {
+    public boolean validationEmail(String enteredEmail) {
         return (enteredEmail.contains("@") && enteredEmail.contains(".com"));
     }
 
-    String getValidEmail() {
+    public String getValidEmail() {
         String email = askForEmail();
         boolean status = validationEmail(email);
 
@@ -28,17 +27,17 @@ public class Util {
         return email;
     }
 
-    String askForPassword() {
+    public String askForPassword() {
         System.out.println("Digite a senha:");
         return scanner.next();
     }
 
-    boolean validationPassword(String enteredPassword) {
+    public boolean validationPassword(String enteredPassword) {
         String regex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{7,}$";
         return enteredPassword.matches(regex);
     }
 
-    String getValidPassword() {
+    public String getValidPassword() {
         String password = askForPassword();
         boolean status = validationPassword(password);
 

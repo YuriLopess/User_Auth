@@ -1,6 +1,7 @@
 package dev.yurilopes.controller;
 
 import dev.yurilopes.model.AccountModel;
+import dev.yurilopes.service.EmailVerifierService;
 
 import java.util.Scanner;
 
@@ -16,12 +17,12 @@ public class AccountController {
 
     public String getValidEmail() {
         String email = askForEmail();
-        boolean status = accountModel.validationEmail(email);
+        boolean status = EmailVerifierService.isValidEmail(email);
 
         while (!status) {
             System.out.println("Tente de novo, email não valido.");
             email = askForEmail();
-            status = accountModel.validationEmail(email);
+            status = EmailVerifierService.isValidEmail(email);
         }
         return email;
     }

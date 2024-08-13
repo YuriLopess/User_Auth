@@ -1,6 +1,6 @@
 package dev.yurilopes.view;
 
-import dev.yurilopes.Util;
+import dev.yurilopes.controller.AccountController;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
@@ -11,7 +11,9 @@ public class UserView {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        Util util = new Util();
+
+        AccountController accountController = new AccountController();
+
         Map<String, String> users = new HashMap<>();
 
         byte option = 0;
@@ -46,8 +48,8 @@ public class UserView {
                     break;
 
                 case 1:
-                    email = util.getValidEmail();
-                    password = util.getValidPassword();
+                    email = accountController.getValidEmail();
+                    password = accountController.getValidPassword();
 
                     users.put(email, password);
                     System.out.println("Email cadastrado com sucesso!");
@@ -55,16 +57,16 @@ public class UserView {
 
                 case 2:
                     System.out.println("Faça o login");
-                    String comparisonEmail = util.getValidEmail();
+                    String comparisonEmail = accountController.getValidEmail();
                     while (!comparisonEmail.equals(email)) {
                         System.out.println("Email não cadastrado. Digite novamente");
-                        comparisonEmail = util.getValidEmail();
+                        comparisonEmail = accountController.getValidEmail();
                     }
 
-                    String comparisonPassword = util.getValidPassword();
+                    String comparisonPassword = accountController.getValidPassword();
                     while (!comparisonPassword.equals(password)) {
                         System.out.println("Senha incorreta. Digite novamente");
-                        comparisonPassword = util.getValidPassword();
+                        comparisonPassword =accountController.getValidPassword();
                     }
 
                     System.out.println("Login finalizado.");

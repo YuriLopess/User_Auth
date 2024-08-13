@@ -1,28 +1,27 @@
-package dev.yurilopes;
+package dev.yurilopes.controller;
+
+import dev.yurilopes.model.AccountModel;
 
 import java.util.Scanner;
 
-public class Util {
+public class AccountController {
 
     Scanner scanner = new Scanner(System.in);
+    AccountModel accountModel = new AccountModel();
 
     public String askForEmail() {
         System.out.println("Digite o email:");
         return scanner.next();
     }
 
-    public boolean validationEmail(String enteredEmail) {
-        return (enteredEmail.contains("@") && enteredEmail.contains(".com"));
-    }
-
     public String getValidEmail() {
         String email = askForEmail();
-        boolean status = validationEmail(email);
+        boolean status = accountModel.validationEmail(email);
 
         while (!status) {
             System.out.println("Tente de novo, email não valido.");
             email = askForEmail();
-            status = validationEmail(email);
+            status = accountModel.validationEmail(email);
         }
         return email;
     }
@@ -32,19 +31,14 @@ public class Util {
         return scanner.next();
     }
 
-    public boolean validationPassword(String enteredPassword) {
-        String regex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{7,}$";
-        return enteredPassword.matches(regex);
-    }
-
     public String getValidPassword() {
         String password = askForPassword();
-        boolean status = validationPassword(password);
+        boolean status = accountModel.validationPassword(password);
 
         while (!status) {
             System.out.println("Tente de novo, senha não valida");
             password = askForPassword();
-            status = validationPassword(password);
+            status = accountModel.validationPassword(password);
         }
         return password;
     }

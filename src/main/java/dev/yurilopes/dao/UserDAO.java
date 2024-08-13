@@ -1,14 +1,14 @@
 package dev.yurilopes.dao;
 
 import dev.yurilopes.config.database.MySQLConnectionFactory;
-import dev.yurilopes.model.User;
+import dev.yurilopes.model.UserModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UserDAO {
 
-    public void save(User user) {
+    public void save(UserModel user) {
         String sql = "INSERT INTO users(name, email, password) VALUES(?, ?, ?)";
 
         Connection connection = null;

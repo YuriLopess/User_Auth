@@ -40,7 +40,7 @@ public class EmailConnectionFactory {
         return email;
     }
 
-    public static void sendTestEmail() {
+    public void sendTestEmail() {
         try {
             Email email = createEmail();
             email.setFrom("email@example.com");

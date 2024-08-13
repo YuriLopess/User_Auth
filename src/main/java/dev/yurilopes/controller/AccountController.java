@@ -10,8 +10,25 @@ public class AccountController {
     Scanner scanner = new Scanner(System.in);
     AccountModel accountModel = new AccountModel();
 
+    public String askForName() {
+        System.out.print("Digite o seu nome:");
+        return scanner.next();
+    }
+
+    public String getValidName() {
+        String name = askForName();
+        boolean status = accountModel.validationName(name);
+
+        while (!status) {
+            System.out.println("\u001B[31mTente de novo, nome não valido.\u001B[0m");
+            name = askForName();
+            status = accountModel.validationName(name);
+        }
+        return name;
+    }
+
     public String askForEmail() {
-        System.out.println("Digite o email:");
+        System.out.print("Digite o email:");
         return scanner.next();
     }
 
@@ -20,7 +37,7 @@ public class AccountController {
         boolean status = EmailVerifierService.isValidEmail(email);
 
         while (!status) {
-            System.out.println("Tente de novo, email não valido.");
+            System.out.println("\u001B[31mTente de novo, email não valido.\u001B[0m");
             email = askForEmail();
             status = EmailVerifierService.isValidEmail(email);
         }
@@ -28,7 +45,7 @@ public class AccountController {
     }
 
     public String askForPassword() {
-        System.out.println("Digite a senha:");
+        System.out.print("Digite a senha:");
         return scanner.next();
     }
 
@@ -37,7 +54,7 @@ public class AccountController {
         boolean status = accountModel.validationPassword(password);
 
         while (!status) {
-            System.out.println("Tente de novo, senha não valida");
+            System.out.println("\u001B[31mTente de novo, senha não valida\u001B[0m");
             password = askForPassword();
             status = accountModel.validationPassword(password);
         }

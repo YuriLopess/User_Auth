@@ -35,7 +35,6 @@ public class MySQLConnectionFactory {
         Connection connection = null;
         try {
             connection = getConnection();
-            System.out.println("Conexão estabelecida com sucesso...");
         } catch (SQLException e) {
             System.out.println("Erro ao conectar: " + e.getMessage());
         }

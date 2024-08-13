@@ -1,11 +1,11 @@
 package dev.yurilopes.service;
 
-
-import static dev.yurilopes.config.email.EmailConnectionFactory.sendTestEmail;
+import dev.yurilopes.config.email.EmailConnectionFactory;
 
 public class EmailService {
     public static void main(String[] args) {
-        sendTestEmail();
-    }
+        EmailConnectionFactory emailConnectionFactory = new EmailConnectionFactory();
 
+        emailConnectionFactory.sendTestEmail();
+    }
 }

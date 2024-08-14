@@ -1,7 +1,7 @@
 package dev.yurilopes.view;
 
-import dev.yurilopes.config.email.EmailConnectionFactory;
 import dev.yurilopes.controller.AccountController;
+import dev.yurilopes.controller.EmailController;
 import dev.yurilopes.dao.UserDAO;
 import dev.yurilopes.model.UserModel;
 import dev.yurilopes.service.EmailService;
@@ -15,10 +15,10 @@ public class UserView {
         Scanner scanner = new Scanner(System.in);
 
         AccountController accountController = new AccountController();
+        EmailController emailController = new EmailController();
         UserModel user = new UserModel();
         UserDAO userDAO = new UserDAO();
         EmailService emailService = new EmailService();
-        EmailConnectionFactory emailConnectionFactory = new EmailConnectionFactory();
 
         byte option = 0;
         boolean validMenu;
@@ -73,8 +73,11 @@ public class UserView {
                         comparisonPassword = accountController.getValidPassword();
                     }
 
-                    System.out.println("Vef 2 etapas");
-                    emailConnectionFactory.sendTestEmail();
+                    System.out.println("Veficação de 2 etapas: ");
+
+                    emailService.twoSteps(user.getEmail());
+
+                    emailController.getValidCode();
 
                     System.out.println("\u001B[32mLogin finalizado.\u001B[0m");
                     break;

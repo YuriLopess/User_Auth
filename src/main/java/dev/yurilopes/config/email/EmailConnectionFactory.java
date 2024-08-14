@@ -39,18 +39,4 @@ public class EmailConnectionFactory {
 
         return email;
     }
-
-    public void sendTestEmail() {
-        try {
-            Email email = createEmail();
-            email.setFrom("email@example.com");
-            email.setSubject("Envio de Email");
-            email.setMsg("Testando como enviar um email");
-            email.addTo("email@example.com");
-            email.send();
-            System.out.println("Email enviado com sucesso");
-        } catch (EmailException e) {
-            System.out.println("Erro ao enviar email: " + e.getMessage());
-        }
-    }
 }

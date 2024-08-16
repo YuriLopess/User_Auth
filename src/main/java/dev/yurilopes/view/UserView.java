@@ -21,7 +21,9 @@ public class UserView {
         EmailService emailService = new EmailService();
 
         byte option = 0;
+        byte attempts = 0;
         boolean validMenu;
+        String decision;
 
         System.out.println("---- User Auth ----");
 
@@ -63,14 +65,40 @@ public class UserView {
                     System.out.println("Faça o login");
                     String comparisonEmail = accountController.getValidEmail();
                     while (!comparisonEmail.equals(user.getEmail())) {
+                        attempts += 1;
                         System.out.println("\u001B[31mEmail não cadastrado. Digite novamente\u001B[0m");
                         comparisonEmail = accountController.getValidEmail();
+
+
+                        if (attempts >= 3) {
+                            System.out.println("Não tem cadastro?[s, n]");
+                            decision = scanner.next();
+                            if (decision.equals("s")) {
+                                attempts = 0;
+                                user.setName(accountController.getValidName());
+                                user.setEmail(accountController.getValidEmail());
+                                user.setPassword(accountController.getValidPassword());
+                                userDAO.save(user);
+                            }
+                        }
                     }
+
+                    attempts = 0;
 
                     String comparisonPassword = accountController.getValidPassword();
                     while (!comparisonPassword.equals(user.getPassword())) {
+                        attempts += 1;
                         System.out.println("\u001B[31mSenha incorreta. Digite novamente\u001B[0m");
                         comparisonPassword = accountController.getValidPassword();
+
+                        if (attempts >= 3) {
+                            System.out.println("Esqueceu a senha?[s, n]");
+                            decision = scanner.next();
+                            if (decision.equals("s")) {
+                                attempts = 0;
+                                emailService.forgotPassword(user.getEmail());
+                            }
+                        }
                     }
 
                     System.out.println("Veficação de 2 etapas: ");

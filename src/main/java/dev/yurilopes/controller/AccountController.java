@@ -10,7 +10,7 @@ public class AccountController {
     Scanner scanner = new Scanner(System.in);
     AccountModel accountModel = new AccountModel();
 
-    public String askForName() {
+    private String askForName() {
         System.out.print("Digite o seu nome:");
         return scanner.next();
     }
@@ -27,7 +27,7 @@ public class AccountController {
         return name;
     }
 
-    public String askForEmail() {
+    private String askForEmail() {
         System.out.print("Digite o email:");
         return scanner.next();
     }
@@ -44,7 +44,7 @@ public class AccountController {
         return email;
     }
 
-    public String askForPassword() {
+    private String askForPassword() {
         System.out.print("Digite a senha:");
         return scanner.next();
     }

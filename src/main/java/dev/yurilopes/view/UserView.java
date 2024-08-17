@@ -107,7 +107,31 @@ public class UserView {
 
                     emailController.getValidCode();
 
-                    System.out.println("\u001B[32mLogin finalizado.\u001B[0m");
+                    System.out.printf("""
+                            Olá %s, Diite sua opção:
+                            1 - Ver informações
+                            2 - Alterar senha
+                            3 - Excluir conta
+                            4 - Sair""", user.getName());
+                    option = scanner.nextByte();
+
+                    switch (option) {
+                        default:
+                            System.out.println("erro ");
+                            break;
+                        case 1:
+                            System.out.println("Teste");
+                            break;
+                        case 2:
+                            System.out.println("Teste");
+                            break;
+                        case 3:
+                            System.out.println("Teste");
+                            break;
+                        case 4:
+                            System.out.println("Teste");
+                            break;
+                    }
                     break;
 
                 case 3:

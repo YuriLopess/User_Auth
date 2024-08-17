@@ -2,7 +2,6 @@ package dev.yurilopes.service;
 
 import java.util.Random;
 
-
 import dev.yurilopes.model.UserModel;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
@@ -56,5 +55,4 @@ public class EmailService {
             throw new RuntimeException(e);
         }
     }
-
 }

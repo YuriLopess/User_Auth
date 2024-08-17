@@ -42,4 +42,68 @@ public class UserDAO {
             }
         }
     }
+
+    public void update(UserModel userModel) {
+        String sql = "UPDATE users set password = ?" +
+                "WHERE id = ?";
+
+        Connection connection = null;
+        PreparedStatement pstm = null;
+
+        try {
+            connection = MySQLConnectionFactory.recoverConnection();
+            pstm = (PreparedStatement) connection.prepareStatement(sql);
+
+            pstm.setString(1, userModel.getPassword());
+            pstm.setInt(2, userModel.getId());
+            pstm.execute();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+                if (connection != null) {
+                    connection.close();
+                }
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void delete(int id) {
+        String sql = "DELETE FROM users WHERE id = ?";
+
+        Connection connection = null;
+        PreparedStatement pstm = null;
+
+        try {
+            connection = MySQLConnectionFactory.recoverConnection();
+            pstm = (PreparedStatement) connection.prepareStatement(sql);
+
+            pstm.setInt(1, id);
+            pstm.execute();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+                if (connection != null) {
+                    connection.close();
+                }
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package dev.yurilopes.service;
 
 import java.util.Random;
+import java.util.Scanner;
 
 import dev.yurilopes.model.UserModel;
 import org.apache.commons.mail.Email;
@@ -11,21 +12,19 @@ import static java.lang.Math.abs;
 
 public class EmailService {
 
+    Scanner scanner = new Scanner(System.in);
     Random random = new Random();
     UserModel user = new UserModel();
 
-    private int currentCode;
+    private int code;
 
     private int generateCode() {
-        int code = 0;
-        for (int i = 0; i <= 5; i++) {
-            code = random.nextInt() ;
-        }
-        return currentCode = abs(code);
+        code = random.nextInt(900000) + 100000;
+        return code = abs(code);
     }
 
     public boolean verifyCode(int emailReceived) {
-        return emailReceived == currentCode;
+        return emailReceived == code;
     }
 
     public void twoSteps(String emailToSend) {
@@ -40,6 +39,18 @@ public class EmailService {
             System.out.println("Email enviado");
         } catch (EmailException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void getValidCode() {
+        System.out.print("Digite o código informado: ");
+        int recebido = scanner.nextInt();
+
+        boolean validation = verifyCode(recebido);
+        while (!validation) {
+            System.out.println("Código não reconhecido, por favor digite novamente:");
+            recebido = scanner.nextInt();
+            validation = verifyCode(recebido);
         }
     }
 

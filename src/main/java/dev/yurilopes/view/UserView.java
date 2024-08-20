@@ -1,7 +1,6 @@
 package dev.yurilopes.view;
 
 import dev.yurilopes.controller.AccountController;
-import dev.yurilopes.controller.EmailController;
 import dev.yurilopes.dao.UserDAO;
 import dev.yurilopes.model.UserModel;
 import dev.yurilopes.service.EmailService;
@@ -15,7 +14,6 @@ public class UserView {
         Scanner scanner = new Scanner(System.in);
 
         AccountController accountController = new AccountController();
-        EmailController emailController = new EmailController();
         UserModel user = new UserModel();
         UserDAO userDAO = new UserDAO();
         EmailService emailService = new EmailService();
@@ -42,14 +40,14 @@ public class UserView {
                     option = scanner.nextByte();
                     validMenu = true;
                 } catch (InputMismatchException e) {
-                    System.out.println("\u001B[31mErro: Entrada inválida. Por favor, digite um número.\u001B[0m");  // Mensagem vermelha para erros
+                    System.out.println("\u001B[31mErro: Entrada inválida. Por favor, digite um número.\u001B[0m");
                     scanner.next();
                 }
             }
 
             switch (option) {
                 default:
-                    System.out.println("\u001B[31mOpção inválida. Tente novamente.\u001B[0m");  // Mensagem vermelha para opções inválidas
+                    System.out.println("\u001B[31mOpção inválida. Tente novamente.\u001B[0m");
                     break;
 
                 case 1:
@@ -105,33 +103,48 @@ public class UserView {
 
                     emailService.twoSteps(user.getEmail());
 
-                    emailController.getValidCode();
+                    emailService.getValidCode();
 
-                    System.out.printf("""
-                            Olá %s, Diite sua opção:
-                            1 - Ver informações
-                            2 - Alterar senha
-                            3 - Excluir conta
-                            4 - Sair""", user.getName());
-                    option = scanner.nextByte();
 
-                    switch (option) {
-                        default:
-                            System.out.println("erro ");
-                            break;
-                        case 1:
-                            System.out.println("Teste");
-                            break;
-                        case 2:
-                            System.out.println("Teste");
-                            break;
-                        case 3:
-                            System.out.println("Teste");
-                            break;
-                        case 4:
-                            System.out.println("Teste");
-                            break;
-                    }
+                    do {
+                        validMenu = false;
+                        while (!validMenu) {
+                            try {
+                                System.out.printf("""
+                                    Olá %s, Digite sua opção:
+                                    1 - Ver informações
+                                    2 - Alterar senha
+                                    3 - Excluir conta
+                                    4 - Sair""", user.getName());
+                                option = scanner.nextByte();
+                                validMenu = true;
+                            } catch (InputMismatchException e) {
+                                System.out.println("\u001B[31mErro: Entrada inválida. Por favor, digite um número.\u001B[0m");
+                                scanner.next();
+                            }
+
+                        }
+
+                        switch (option) {
+                            default:
+                                System.out.println("erro ");
+                                break;
+                            case 1:
+                                System.out.println("Teste");
+                                break;
+                            case 2:
+                                System.out.println("Teste");
+                                break;
+                            case 3:
+                                System.out.println("Teste");
+                                break;
+                            case 4:
+                                System.out.println("Teste");
+                                break;
+                        }
+
+                    } while (option != 4);
+
                     break;
 
                 case 3:

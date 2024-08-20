@@ -10,7 +10,7 @@ import org.apache.commons.mail.EmailException;
 import static dev.yurilopes.config.email.EmailConnectionFactory.createEmail;
 import static java.lang.Math.abs;
 
-public class EmailService {
+public class TwoFactorAuthService {
 
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
@@ -36,7 +36,7 @@ public class EmailService {
                     ". Confirme o código recebido no terminal para continuar");
             email.addTo(emailToSend);
             email.send();
-            System.out.println("Email enviado");
+            System.out.println("\u001B[32mEmail enviado!\u001B[0m");
         } catch (EmailException e) {
             throw new RuntimeException(e);
         }
@@ -48,22 +48,9 @@ public class EmailService {
 
         boolean validation = verifyCode(recebido);
         while (!validation) {
-            System.out.println("Código não reconhecido, por favor digite novamente:");
+            System.out.println("\u001B[31mCódigo não reconhecido, por favor digite novamente:\u001B[0m");
             recebido = scanner.nextInt();
             validation = verifyCode(recebido);
-        }
-    }
-
-    public void forgotPassword(String emailToSend) {
-        try {
-            Email email = createEmail();
-            email.setFrom("y1008880@gmail.com");
-            email.setSubject("Reecuperação de Senha");
-            email.setMsg("A senha de cadastro do " + user.getName() + "é: " + user.getPassword() + ".");
-            email.addTo(emailToSend);
-            System.out.println("Email enviado");
-        } catch (EmailException e) {
-            throw new RuntimeException(e);
         }
     }
 }
